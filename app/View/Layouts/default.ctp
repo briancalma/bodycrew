@@ -42,7 +42,12 @@ $cakeVersion = __d('cake_dev', 'CakePHP %s', Configure::version())
 		</div>
 		<div id="content">
 
-			<?php echo $this->Flash->render(); ?>
+
+			<?php 
+				echo $this->Flash->render(); 
+				echo $this->Flash->render('auth');
+
+			?>
 
 			<?php echo $this->fetch('content'); ?>
 		</div>

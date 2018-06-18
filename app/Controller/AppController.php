@@ -30,5 +30,22 @@ App::uses('Controller', 'Controller');
  * @package		app.Controller
  * @link		https://book.cakephp.org/2.0/en/controllers.html#the-app-controller
  */
-class AppController extends Controller {
+class AppController extends Controller 
+{
+    public $helpers = ['Form','Html'];
+    
+    public $components = [
+                             'Flash',
+                             'Auth' =>  [
+                                            'loginRedirect' => ['controller' => 'users','action' => 'index'],
+                                            'logoutRedirect' => ['controller' => 'users','action' => 'login'],
+                                            'authenticate' => ['Form' => ['passwordHasher' => 'Blowfish']],
+                                            # 'authError' => 'Did you really think you are allowed to see that?',
+                                        ]
+                         ];
+                         
+    public function beforeFilter() 
+    {
+        $this->Auth->allow('display' ,'index');
+    }
 }
